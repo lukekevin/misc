@@ -36,12 +36,18 @@ def mute_videos(file_list):
         muted = video.without_audio()
         muted.write_videofile(file[:-4] + "_muted.mp4")
 
+def format_change(file_list):
+    #Convert .mov, .avi, .m4a to .mp4
+    for file in file_list:
+        video=VideoFileClip(file)
+        video.write_videofile(file[:-4]+"formatted.mp4", codec="libx264")
+
 def main():
     print('***********Welcome to Kevin Lukes simple Python-based video editor.************\n')
     print('This video editor uses MoviePy library which itself is built upon FFmpeg.\n')
     print('My code provides a clean wrapper to enable various video editing options from MoviePy.\n')
     
-    operation = input("Select the operation to perform (clip, resize, merge, flip, mute): ").lower()
+    operation = input("Select the operation to perform (clip, resize, merge, flip, mute, converting): ").lower()
     
     file_list = input("Enter a list of video files separated by spaces: ").split()
     
@@ -59,6 +65,10 @@ def main():
 
     elif operation == "mute":
         mute_videos(file_list)
+
+    elif operation == "converting":
+        format_change(file_list)
+        
 
 if __name__ == "__main__":
     main()
