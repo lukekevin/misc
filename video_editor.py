@@ -16,7 +16,7 @@ def resize_videos(file_list):
     for file in file_list:
         video = VideoFileClip(file)
         resized = video.resize(height=height_val)
-        resized.write_videofile(file[:-4] + "_resized.mp4")
+        resized.write_videofile(file[:-4] + "_resized.mp4", codec='libx264')
 
 def merge_videos(file_list):
     merged = concatenate_videoclips([VideoFileClip(file) for file in file_list])
